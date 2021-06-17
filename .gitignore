@@ -1,0 +1,4 @@
+.vscode
+src/*.o
+src/srt-editor
+srt-files/*.srt
