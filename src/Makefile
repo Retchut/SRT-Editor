@@ -2,11 +2,10 @@ CC = g++
 CFLAGS = -c -Wall
 
 all: offsetter.o
-	$(CC) offsetter.o -o srt-editor
+	$(CC) offsetter.o utils.cpp -o srt-editor
 
-offsetter.o: offsetter.cpp
-	$(CC) $(CFLAGS) offsetter.cpp
+offsetter.o: offsetter.cpp utils.cpp
+	$(CC) $(CFLAGS) offsetter.cpp utils.cpp
 
 clean:
-	rm *.o
-	rm srt-editor
+	-rm srt-editor *.o
