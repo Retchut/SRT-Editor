@@ -28,24 +28,26 @@ void addOffset(std::string subFile, int h, int m, int s, int ms){
     //open file from reading and new file for writing to
     std::ifstream oldFile(subFile);
     std::ofstream newFile(newName);
-    
+
     std::string line;
     while(std::getline(oldFile, line)){
-        int id;
-        try{
-            //TODO: find a better solution
-            id = std::stoi(line);
-            
-            //if stoi succeeds, we know we have found a sub (with id id)
-            newFile << id << '\n';          //save its id as normal
-            std::getline(oldFile, line);    //get timestamp of the sub
-            editTimestamp(line, h, m, s, ms);
+        if(isNewLine(line)){
             newFile << line;
         }
-        catch(const std::invalid_argument &ia){
-            //line does not start with a number,
-            //write line as usual
-            newFile << line;
+        else{
+            //treat id
+            newFile << line << "\n";
+            //treat timestamp
+            std::getline(oldFile, line);
+            editTimestamp(line, h, m, s, ms);
+            newFile << line << "\n";
+
+            //treat text
+            while(!(isNewLine(line))){
+                if(!std::getline(oldFile, line))
+                    break;
+                newFile << line << "\n";
+            }
         }
     }
 

@@ -7,6 +7,10 @@ void printUsage(){
     std::cout << "Usage: ./srt-editor hourOffset minOffset secOffset, msecOffset srtFile\n";
 }
 
+bool isNewLine(std::string compare){
+    return compare == "\n" || compare == "\r\n";
+}
+
 //  Kindly appropriated from
 //  https://stackoverflow.com/a/7621814
 std::vector<std::string> splitString(std::string toSplit, std::string delimiters){
