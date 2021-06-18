@@ -15,7 +15,7 @@ To run the program, simply run the following command from a terminal, while insi
 
 Where:
 
-    -\<thing\>Offset is the offset to add to *thing*
+    -<thing>Offset is the offset to add to *thing*
 
     -srtFile is the name of the subtitle file you want to edit, inside the srt-files folder. It is not the relative path to the folder, nor an absolute path.
 
