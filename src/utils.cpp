@@ -3,6 +3,10 @@
 #include <iostream>
 #include <sstream>
 
+void printUsage(){
+    std::cout << "Usage: ./srt-editor srtFile";
+}
+
 //  Kindly appropriated from
 //  https://stackoverflow.com/a/7621814
 std::vector<std::string> splitString(std::string toSplit, std::string delimiters){
