@@ -7,10 +7,15 @@
 #include "offsetter.h"
 #include "utils.h"
 
-int main(){
+int main(int argc, char *argv[]){
+    if(argc < 6 || argc > 6){   //eventually I'll allow editing multiple files
+        printUsage();
+        return 1;
+    }
+
     std::string fileName = "../srt-files/";
-    fileName.append("S01E01-Asteroids.srt");
-    addOffset(fileName, 0, 0, 2, 0);
+    fileName.append(argv[5]);
+    addOffset(fileName, std::stoi(argv[1]), std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]));
     return 0;
 }
 
