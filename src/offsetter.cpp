@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -63,6 +64,8 @@ void editTimestamp(std::string &old, int h, int m, int s, int ms){
     std::stringstream ss;
     std::vector<std::string> times = splitString(old, ":, ");
 
+    ss << std::setfill('0') << std::setw(5);
+
     int stampNum = 0;
     for(size_t i = 0; i < 3; i++){
         if(i == 1){    //arrow
@@ -79,16 +82,11 @@ void editTimestamp(std::string &old, int h, int m, int s, int ms){
 
             for(size_t i = 0; i < 3; i++){
                 int newTime = timeStamps[i] + offsets[i];
-                if(newTime < 10) //in order to write in the hh:mm:ss format
-                    ss << 0;
-                ss << newTime << delimiters[i];
+                ss << std::setfill('0') << std::setw(2) << newTime << delimiters[i];
             }
+
             int newTime = timeStamps[3] + offsets[3];
-            if(newTime < 100)   //extra possible 0
-                ss << 0;
-            if(newTime < 10)
-                ss << 0;
-            ss << newTime;
+            ss << std::setfill('0') << std::setw(3) << newTime;
 
             stampNum++;
         }

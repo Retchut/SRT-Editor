@@ -11,14 +11,15 @@ Navigate to the src folder and make.
 
 To run the program, simply run the following command from a terminal, while inside the src folder:
 
-***./srt-editor hourOffset minOffset secOffset, msecOffset srtFile***
+***./srt-editor hourOffset minOffset secOffset msecOffset srtFile***
 
 Where:
 
-    -<thing>Offset is the offset to add to *thing*
+    -xOffset is the offset to add to x
 
     -srtFile is the name of the subtitle file you want to edit, inside the srt-files folder. It is not the relative path to the folder, nor an absolute path.
 
 
 #### Notes
-There is a high likelyhood that the program breaks if/when a subtitle sentence begins with a letter. I'll fix that when I'm less sleep deprived. For now, it does the work I need it to ^^
+If the srt file contains unix styled line endings, each line ending after the time stamps of each subtitle will be replaced with windows styled line endings. In all other cases, the line endings are preserved.
+Eventually, I'll take the time to fix this, but it shouldn't cause any issues whatsoever.
