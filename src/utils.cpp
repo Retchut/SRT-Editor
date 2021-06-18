@@ -4,7 +4,7 @@
 #include <sstream>
 
 void printUsage(){
-    std::cout << "Usage: ./srt-editor srtFile";
+    std::cout << "Usage: ./srt-editor hourOffset minOffset secOffset, msecOffset srtFile\n";
 }
 
 //  Kindly appropriated from
