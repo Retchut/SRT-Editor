@@ -16,6 +16,7 @@ int main(int argc, char *argv[]){
     std::string fileName = "../srt-files/";
     fileName.append(argv[5]);
     addOffset(fileName, std::stoi(argv[1]), std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]));
+
     return 0;
 }
 
@@ -31,22 +32,25 @@ void addOffset(std::string subFile, int h, int m, int s, int ms){
 
     std::string line;
     while(std::getline(oldFile, line)){
+        line.append("\n");  //getline ignores \n
         if(isNewLine(line)){
             newFile << line;
         }
         else{
             //treat id
-            newFile << line << "\n";
+            newFile << line;
             //treat timestamp
             std::getline(oldFile, line);
+            line.append("\n");  //getline ignores \n
             editTimestamp(line, h, m, s, ms);
-            newFile << line << "\n";
+            newFile << line;
 
             //treat text
             while(!(isNewLine(line))){
                 if(!std::getline(oldFile, line))
                     break;
-                newFile << line << "\n";
+                line.append("\n");  //getline ignores \n
+                newFile << line;
             }
         }
     }
@@ -89,7 +93,7 @@ void editTimestamp(std::string &old, int h, int m, int s, int ms){
             stampNum++;
         }
     }
-    ss << '\n';
+    ss << "\r\n";
     
     old = ss.str();
 }
