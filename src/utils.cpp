@@ -22,9 +22,5 @@ std::vector<std::string> splitString(std::string toSplit, std::string delimiters
             words.push_back(line.substr(prev, std::string::npos));
     }
 
-    for(auto s:words){
-        std::cout << s << std::endl;
-    }
-
     return words;
 }
