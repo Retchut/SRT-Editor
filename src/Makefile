@@ -1,11 +1,19 @@
 CC = g++
 CFLAGS = -c -Wall
 
-all: offsetter.o
-	$(CC) offsetter.o utils.cpp -o srt-editor
+ifeq ($(OS),Windows_NT)
+	EXECUTABLE=srt-editor.exe
+	DELETE=del /f
+else
+	EXECUTABLE=srt-editor
+	DELETE=rm -f
+endif
+
+all: offsetter.o utils.o
+	$(CC) offsetter.o utils.o -o $(EXECUTABLE)
 
 offsetter.o: offsetter.cpp utils.cpp
 	$(CC) $(CFLAGS) offsetter.cpp utils.cpp
 
 clean:
-	-rm srt-editor *.o
+	-$(DELETE) *.o srt-editor srt-editor.exe
