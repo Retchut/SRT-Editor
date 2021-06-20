@@ -4,24 +4,22 @@
 Simple srt file editing tool created to aid in my manual modification (and occasional creation) of subtitle files.
 
 
-#### Usage
+### Usage
 In order to use this application, create a folder called "srt-files" on the root directory of the repo. This will be where you drop the srt files you can later edit using the program.
 
+#### Building
 Navigate to the src folder and make:
 
 ***make*** (if on an unix-based system)
 
 ***mingw32-make.exe*** (if on windows, using gnu make)
 
+#### Running
 To run the program, simply run the following command from a terminal, while inside the src folder:
 
-***./srt-editor hourOffset minOffset secOffset msecOffset srtFile***
+Unix-based: ***./srt-editor hourOffset minOffset secOffset msecOffset srtFile***
 
-or
-
-***srt-editor.exe hourOffset minOffset secOffset msecOffset srtFile***
-
-if on windows
+Windows:    ***srt-editor.exe hourOffset minOffset secOffset msecOffset srtFile***
 
 
 Where:
