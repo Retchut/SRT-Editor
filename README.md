@@ -30,5 +30,5 @@ Where:
 
 
 #### Notes
-If the srt file contains unix styled line endings, each line ending after the time stamps of each subtitle will be replaced with windows styled line endings. In all other cases, the line endings are preserved.
+Line endings will be preserved, save for the line with the timestamps. The line ending in each timestamp will follow the conventions for the OS this program is run in.
 Eventually, I'll take the time to fix this, but it shouldn't cause any issues whatsoever.

@@ -22,8 +22,7 @@ int main(int argc, char *argv[]){
 }
 
 void addOffset(std::string subFile, int h, int m, int s, int ms){
-    //TODO(if I decide to not be lazy): instead of creating a new file, and overwrite the old one
-
+    //TODO(if I decide to not be lazy): instead of creating a new file, backup the and edit the old one
     std::string newName = subFile;
     newName.insert(newName.size()-4, "-edited");
 
@@ -38,11 +37,10 @@ void addOffset(std::string subFile, int h, int m, int s, int ms){
             newFile << line;
         }
         else{
-            //treat id
+            //write id line
             newFile << line;
-            //treat timestamp
+            //treat timestamp line
             std::getline(oldFile, line);
-            line.append("\n");  //getline ignores \n
             editTimestamp(line, h, m, s, ms);
             newFile << line;
 
@@ -62,7 +60,7 @@ void addOffset(std::string subFile, int h, int m, int s, int ms){
 
 void editTimestamp(std::string &old, int h, int m, int s, int ms){
     std::stringstream ss;
-    std::vector<std::string> times = splitString(old, ":, ");
+    std::vector<std::string> times = splitString(old, ":, ");    
 
     ss << std::setfill('0') << std::setw(5);
 
@@ -91,7 +89,7 @@ void editTimestamp(std::string &old, int h, int m, int s, int ms){
             stampNum++;
         }
     }
-    ss << "\r\n";
+    ss << "\n";
     
     old = ss.str();
 }
