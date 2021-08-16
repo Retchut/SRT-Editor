@@ -5,20 +5,36 @@
 #include <string.h>
 
 void printUsage(){
-    std::cout << "Usage: ./srt-editor +/- hh:mm:ss:msc srtFile\n";
+    std::cout << "Usage:\n";
+    std::cout << "-->edit from start to finish\n";
+    std::cout << "\t./srt-editor +/- hh:mm:ss:msc srtFile\n";
+    std::cout << "-->edit from h1:m1:s1:ms1 to h2:m2:s2:ms2 (inclusively)\n";
+    std::cout << "\t./srt-editor +/- hh:mm:ss:msc h1:m1:s1:ms1 h2:m2:s2:ms2 srtFile\n";
 }
 
-int *parseCommand(char *argv[]){
-    static int offsets[4];
-    int operation = (strcmp(argv[1], "+") == 0) ? 1 : -1;
-
-    std::vector<std::string> inputOffset = splitString(argv[2], ":");
-
-    for(size_t i = 0; i < 4; i++){
-        offsets[i] = operation * stoi(inputOffset[i]);
+int parseCommand(char *argv[], int *offsets, int *startInt, int *endInt, std::string *fileName){
+    //if the input operation was not + or -
+    if(strcmp(argv[1], "+") && strcmp(argv[1], "-")){
+        std::cout << "Invalid operation. Supported operations are addition (+) and subtraction (-).\n";
+        return 1;
     }
 
-    return offsets;    
+    int operation = (strcmp(argv[1], "+") == 0) ? 1 : -1;
+
+    std::vector<std::string> strOffsets = splitString(argv[2], ":");
+    std::vector<std::string> strStart = splitString(argv[3], ":");
+    std::vector<std::string> strEnd = splitString(argv[4], ":");
+
+    for(size_t i = 0; i < 4; i++){
+        offsets[i] = operation * stoi(strOffsets[i]);
+        startInt[i] = stoi(strStart[i]);
+        endInt[i] = stoi(strEnd[i]);
+    }
+    
+    //TODO catch error returnal
+    fileName->append(argv[5]);
+
+    return 0;
 }
 
 bool isNewLine(std::string compare){
