@@ -5,7 +5,8 @@ Simple srt file editing tool created to aid in my manual modification (and occas
 
 
 ### Usage
-In order to use this application, create a folder called "srt-files" on the root directory of the repo. This will be where you drop the srt files you can later edit using the program.
+In order to use this application, drop the srt files you want to edit using the program into the "srt-files" folder.
+After running the program on one file, an edited file, aptly named "'original-file-name'-edited.srt" will be created.
 
 #### Building
 Navigate to the src folder and make:
