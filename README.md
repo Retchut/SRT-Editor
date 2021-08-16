@@ -27,13 +27,6 @@ To run the program, simply run one of the following commands from a terminal, wh
 ***adds/subtracts hh:mm:ss:msc to all subtitles on srtFile***
 
 
-    -hh, mm, ss and msc are the offset to add to the hours, minutes, seconds and milisseconds, respectively
-
-    -srtFile is the name of the subtitle file you want to edit, inside the srt-files folder (including the file extension). It is not the relative path to the folder, nor an absolute path.
-
-    -On windows, replace *srt-editor* with *srt-editor.exe*
-
-
 #### Notes
 	-hh, mm, ss and msc are the offset to add to the hours, minutes, seconds and milisseconds, respectively
 
