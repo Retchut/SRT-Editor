@@ -6,7 +6,7 @@
 
 void printUsage();
 
-int parseCommand(char *argv[], int *offsets, int *startInt, int *endInt, std::string *fileName);
+int parseCommand(int argc, char *argv[], int *offsets, int *startInt, int *endInt, std::string *fileName);
 
 bool isNewLine(std::string compare);
 
