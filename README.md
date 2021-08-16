@@ -16,15 +16,15 @@ Navigate to the src folder and make:
 ***mingw32-make.exe*** (if on windows, using gnu make)
 
 #### Running
-To run the program, simply run one the following command from a terminal, while inside the src folder:
+To run the program, simply run one of the following commands from a terminal, while inside the src folder:
 
-***./srt-editor +/- hh:mm:ss:msc h1:m1:s1:ms1 h2:m2:s2:ms2 srtFile***
+>./srt-editor +/- hh:mm:ss:msc h1:m1:s1:ms1 h2:m2:s2:ms2 srtFile
 
-    - adds/subtracts hh:mm:ss:msc to all subtitles on srtFile beginning between h1:m1:s1:ms1 and h2:m2:s2:ms2 (inclusive)
+***adds/subtracts hh:mm:ss:msc to all subtitles on srtFile beginning between h1:m1:s1:ms1 and h2:m2:s2:ms2 (inclusive)***
 
-***./srt-editor +/- hh:mm:ss:msc srtFile***
+>./srt-editor +/- hh:mm:ss:msc srtFile
 
-    - adds/subtracts hh:mm:ss:msc to all subtitles on srtFile
+***adds/subtracts hh:mm:ss:msc to all subtitles on srtFile***
 
 Notes:
 
