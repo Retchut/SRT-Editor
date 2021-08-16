@@ -9,14 +9,15 @@
 #include "utils.h"
 
 int main(int argc, char *argv[]){
-    if(argc < 6 || argc > 6){   //eventually I'll allow editing multiple files
+    if(argc < 4 || argc > 4){   //eventually I'll allow editing multiple files
         printUsage();
         return 1;
     }
 
+    int *offsets = parseCommand(argv);  //only contains 4 values
     std::string fileName = "../srt-files/";
-    fileName.append(argv[5]);
-    addOffset(fileName, std::stoi(argv[1]), std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]));
+    fileName.append(argv[3]);
+    addOffset(fileName, offsets[0], offsets[1], offsets[2], offsets[3]);
 
     return 0;
 }

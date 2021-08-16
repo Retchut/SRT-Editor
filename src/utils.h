@@ -6,6 +6,8 @@
 
 void printUsage();
 
+int *parseCommand(char *argv[]);
+
 bool isNewLine(std::string compare);
 
 std::vector<std::string> splitString(std::string toSplit, std::string delimiters);

@@ -2,9 +2,23 @@
 
 #include <iostream>
 #include <sstream>
+#include <string.h>
 
 void printUsage(){
-    std::cout << "Usage: ./srt-editor hourOffset minOffset secOffset, msecOffset srtFile\n";
+    std::cout << "Usage: ./srt-editor +/- hh:mm:ss:msc srtFile\n";
+}
+
+int *parseCommand(char *argv[]){
+    static int offsets[4];
+    int operation = (strcmp(argv[1], "+") == 0) ? 1 : -1;
+
+    std::vector<std::string> inputOffset = splitString(argv[2], ":");
+
+    for(size_t i = 0; i < 4; i++){
+        offsets[i] = operation * stoi(inputOffset[i]);
+    }
+
+    return offsets;    
 }
 
 bool isNewLine(std::string compare){

@@ -17,14 +17,14 @@ Navigate to the src folder and make:
 #### Running
 To run the program, simply run the following command from a terminal, while inside the src folder:
 
-Unix-based: ***./srt-editor hourOffset minOffset secOffset msecOffset srtFile***
+Unix-based: ***./srt-editor +/- hh:mm:ss:msc srtFile***
 
-Windows:    ***srt-editor.exe hourOffset minOffset secOffset msecOffset srtFile***
+Windows:    ***srt-editor.exe +/- hh:mm:ss:msc srtFile***
 
 
 Where:
 
-    -xOffset is the offset to add to x
+    -hh, mm, ss and msc are the offset to add to the hours, minutes, seconds and milisseconds, respectively
 
     -srtFile is the name of the subtitle file you want to edit, inside the srt-files folder. It is not the relative path to the folder, nor an absolute path.
 
