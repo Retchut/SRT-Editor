@@ -16,18 +16,23 @@ Navigate to the src folder and make:
 ***mingw32-make.exe*** (if on windows, using gnu make)
 
 #### Running
-To run the program, simply run the following command from a terminal, while inside the src folder:
+To run the program, simply run one the following command from a terminal, while inside the src folder:
 
-Unix-based: ***./srt-editor +/- hh:mm:ss:msc srtFile***
+***./srt-editor +/- hh:mm:ss:msc h1:m1:s1:ms1 h2:m2:s2:ms2 srtFile***
 
-Windows:    ***srt-editor.exe +/- hh:mm:ss:msc srtFile***
+    - adds/subtracts hh:mm:ss:msc to all subtitles on srtFile beginning between h1:m1:s1:ms1 and h2:m2:s2:ms2 (inclusive)
 
+***./srt-editor +/- hh:mm:ss:msc srtFile***
 
-Where:
+    - adds/subtracts hh:mm:ss:msc to all subtitles on srtFile
+
+Notes:
 
     -hh, mm, ss and msc are the offset to add to the hours, minutes, seconds and milisseconds, respectively
 
-    -srtFile is the name of the subtitle file you want to edit, inside the srt-files folder. It is not the relative path to the folder, nor an absolute path.
+    -srtFile is the name of the subtitle file you want to edit, inside the srt-files folder (including the file extension). It is not the relative path to the folder, nor an absolute path.
+
+    -On windows, replace *srt-editor* with *srt-editor.exe*
 
 
 #### Notes
