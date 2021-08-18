@@ -36,6 +36,7 @@ Eventually, I'll take the time to fix this, but it shouldn't cause any issues wh
 
 ##TODO
 
+---> Change all files in directory if the path provided was a directory;
 ---> Maybe maybe maybe add an option to overwrite the old file;
 ---> Add utility to create an empty subtitle at any timestamp (taken up by another sub or not);
 ---> Simple cli to allow selecting the utility to be used;
