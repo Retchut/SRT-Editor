@@ -3,11 +3,6 @@
 
 Simple srt file editing tool created to aid in my manual modification (and occasional creation) of subtitle files.
 
-
-## Usage
-In order to use this application, drop the srt files you want to edit using the program into the "srt-files" folder.
-After running the program on one file, an edited file, aptly named "'original-file-name'-edited.srt" will be created.
-
 ## Building
 Navigate to the src folder and make:
 
@@ -26,11 +21,12 @@ To run the program, simply run one of the following commands from a terminal, wh
 
 ***adds/subtracts hh:mm:ss:msc to all subtitles on srtFile***
 
+After running the program on one file, an edited file, aptly named "'original-file-name'-edited.srt" will be created on the same directory as the original file.
 
 ## Notes
 	-hh, mm, ss and msc are the offset to add to the hours, minutes, seconds and milisseconds, respectively
 
-	-srtFile is the name of the subtitle file you want to edit, inside the srt-files folder (including the file extension). It is not the relative path to the folder, nor an absolute path.
+	-srtFile is either the relative path to the file, or an absolute path to the file you want to edit.
 
 	-on windows, replace *srt-editor* with *srt-editor.exe*
 

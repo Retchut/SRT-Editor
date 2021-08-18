@@ -18,7 +18,7 @@ int main(int argc, char *argv[]){
     int offsets[4];
     int start[4];
     int end[4];
-    std::string fileName = "../srt-files/";
+    std::string fileName = "";
     
     if(parseCommand(argc, argv, offsets, start, end, &fileName) != 0) return 1;
 
