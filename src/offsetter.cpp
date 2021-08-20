@@ -82,24 +82,49 @@ void editTimestamp(std::string &old, int *start, int *end, int h, int m, int s, 
                 std::stoi(times[stampNum*5+0]), std::stoi(times[stampNum*5+1]),
                     std::stoi(times[stampNum*5+2]), std::stoi(times[stampNum*5+3])        
                                 };
+            
+            int offsets[4] = {h, m, s, ms};
+            char delimiters[3] = {':', ':', ','};
 
             //TODO: move this check outside of this function?
             //only check if we can edit if the start value is between bounds
             if(i == 0) edit = canEdit(timestamps, start, end);
             
-            //TODO: set up modular arithmetic
-            int offsets[4] = {h, m, s, ms};
-            char delimiters[3] = {':', ':', ','};
+            //calculate
+            //TODO: Clean this mess up
+            if(edit){
+                int carryOver = 0;
+                timestamps[3] += offsets[3];
+                if(timestamps[3] / 1000 > 0){
+                    carryOver = (timestamps[3] / 1000);
+                    timestamps[3] -= 1000 * carryOver;
+                }
+                else if(timestamps[3] < 0){
+                    carryOver = (timestamps[3] / 1000) - 1;
+                    timestamps[3] += ((timestamps[3] / 1000) - 1) * - 1000;
+                }
 
-            for(size_t i = 0; i < 3; i++){
-                int newTime = timestamps[i];
-                if(edit) newTime += offsets[i];
-                ss << std::setfill('0') << std::setw(2) << newTime << delimiters[i];
+                for(int i = 2; i >= 0; i--){
+                    timestamps[i] += (offsets[i] + carryOver);
+                    if((timestamps[i] / 60 > 0) && (i != 0)){
+                        carryOver = (timestamps[i] / 60);
+                        timestamps[i] -= 60 * carryOver;
+                    }
+                    else if(timestamps[i] < 0){
+                        carryOver = (timestamps[i] / 60) - 1;
+                        timestamps[i] += ((timestamps[i] / 60) - 1) * - 60;
+                    }
+                    else{
+                        carryOver = 0;
+                    }
+                }
             }
 
-            int newTime = timestamps[3];
-            if(edit) newTime += offsets[3];
-            ss << std::setfill('0') << std::setw(3) << newTime;
+            //write to file
+            for(size_t i = 0; i < 3; i++){
+                ss << std::setfill('0') << std::setw(2) << timestamps[i] << delimiters[i];
+            }
+            ss << std::setfill('0') << std::setw(3) << timestamps[3];
 
             stampNum++;
         }
