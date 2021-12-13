@@ -45,3 +45,7 @@ Eventually, I'll take the time to fix this, but it shouldn't cause any issues wh
 ---> Add utility to create an empty subtitle at any timestamp (taken up by another sub or not);
 
 ---> Simple cli to allow selecting the utility to be used;
+
+---> Abstract file generation into a function;
+
+---> Abstract sub reading loop into a function;
