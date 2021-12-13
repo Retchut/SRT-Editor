@@ -4,49 +4,91 @@
 #include <sstream>
 #include <string.h>
 
+const std::vector<std::string> menuOptions = {
+    "1 - Add Offset\n",
+    "2 - Check sub IDs\n",
+    "0 - Quit the application\n"
+};
+
 void printUsage(){
     std::cout << "Usage:\n";
-    std::cout << "-->edit from start to finish\n";
-    std::cout << "\t./srt-editor +/- hh:mm:ss:msc srtFile\n";
-    std::cout << "-->edit from h1:m1:s1:ms1 to h2:m2:s2:ms2 (inclusively)\n";
-    std::cout << "\t./srt-editor +/- hh:mm:ss:msc h1:m1:s1:ms1 h2:m2:s2:ms2 srtFile\n";
+    std::cout << "\t./srt-editor srtFile\n";
 }
 
-int parseCommand(int argc, char *argv[], int *offsets, int *startInt, int *endInt, std::string *fileName){
-    //if the input operation was not + or -
-    if(strcmp(argv[1], "+") && strcmp(argv[1], "-")){
-        std::cout << "Invalid operation. Supported operations are addition (+) and subtraction (-).\n";
+unsigned int cli(){
+    printMenu();
+
+    unsigned int option = 255;
+
+    while(true){
+        std::cout << "\nPlease input your desired option: ";
+        std::string input = "";
+        std::getline(std::cin, input);
+
+        try{
+            option = std::stoi(input);
+        } catch (std::invalid_argument const&) {
+            std::cout << "Please input an integer.\n";
+            continue;
+        }
+        if(!(option < menuOptions.size())){
+            std::cout << "That is not a valid option.\n";
+        }
+        else break;
+    }
+    return option;
+}
+
+void printMenu(){
+    std::cout << std::endl;
+    for(auto &option : menuOptions){
+        std::cout << option;
+    }
+}
+
+int getOffsets(int *offsets, int *start, int *end){
+    std::string input;
+    std::string originalOffset, originalStart, originalEnd, originalName;
+
+    std::cout << "\nPlease insert the operation you want to apply ( (+)/(-) - addition/subtraction ): ";
+    std::getline(std::cin, input);
+    if(strcmp(input.c_str(), "+") && strcmp(input.c_str(), "-")){
+        std::cout << "Invalid operation.\n";
+        return 1;
+    }
+    int operation = (strcmp(input.c_str(), "+") == 0) ? 1 : -1;
+
+    std::cout << "\nPlease insert the offset you wish to add (in the format <hh:mm:ss:msc>): ";
+    std::getline(std::cin, originalOffset);
+    std::vector<std::string> strOffsets = splitString(originalOffset, ":");
+    if(strOffsets.size() != 4){
+        std::cout << "Invalid offset.\n";
         return 1;
     }
 
-    int operation = (strcmp(argv[1], "+") == 0) ? 1 : -1;
-
-    std::string originalOffset, originalStart, originalEnd, originalName;
-
-    originalOffset = argv[2];
-    if(argc == 4){
-        originalStart = "0:0:0:0";
-        originalEnd = "59:59:59:999";
-        originalName = argv[3];
-    }
-    else if(argc == 6){
-        originalStart = argv[3];
-        originalEnd = argv[4];
-        originalName = argv[5];
-    }
-
-    std::vector<std::string> strOffsets = splitString(originalOffset, ":");
+    std::cout << "\nPlease insert the starting timestamp (in the format <hh:mm:ss:msc>; nothing to modify from the start): ";
+    std::getline(std::cin, originalStart);
+    if(strcmp(originalStart.c_str(), "") == 0) originalStart = "0:0:0:0";
     std::vector<std::string> strStart = splitString(originalStart, ":");
+    if(strStart.size() != 4){
+        std::cout << "Invalid offset.\n";
+        return 1;
+    }
+
+    std::cout << "\nPlease insert the ending timestamp (in the format <hh:mm:ss:msc>; nothing to modify until the end): ";
+    std::getline(std::cin, originalEnd);
+    if(strcmp(originalEnd.c_str(), "") == 0) originalEnd = "59:59:59:999";
     std::vector<std::string> strEnd = splitString(originalEnd, ":");
+    if(strEnd.size() != 4){
+        std::cout << "Invalid offset.\n";
+        return 1;
+    }
 
     for(size_t i = 0; i < 4; i++){
         offsets[i] = operation * stoi(strOffsets[i]);
-        startInt[i] = stoi(strStart[i]);
-        endInt[i] = stoi(strEnd[i]);
+        start[i] = stoi(strStart[i]);
+        end[i] = stoi(strEnd[i]);
     }
-    
-    //TODO catch error returnal
-    fileName->append(originalName);
 
     return 0;
 }

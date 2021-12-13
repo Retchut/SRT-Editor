@@ -9,11 +9,11 @@ else
 	DELETE=rm -f
 endif
 
-all: offsetter.o utils.o
-	$(CC) offsetter.o utils.o -o $(EXECUTABLE)
+all: srt-editor.o utils.o
+	$(CC) srt-editor.o utils.o -o $(EXECUTABLE)
 
-offsetter.o: offsetter.cpp utils.cpp
-	$(CC) $(CFLAGS) offsetter.cpp utils.cpp
+srt-editor.o: srt-editor.cpp utils.cpp
+	$(CC) $(CFLAGS) srt-editor.cpp utils.cpp
 
 clean:
 	-$(DELETE) *.o srt-editor srt-editor.exe

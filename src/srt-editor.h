@@ -1,11 +1,11 @@
-#ifndef SRT_EDITOR_SRC_OFFSETTER_H
-#define SRT_EDITOR_SRC_OFFSETTER_H
+#ifndef _SRT_EDITOR_H_
+#define _SRT_EDITOR_H_
 
 #include <string>
 
 void checkIDs(std::string subFile);
 
-void addOffset(std::string subFile, int *start, int *end, int h, int m, int s, int ms);
+void addOffset(std::string subFile);
 
 void editTimestamp(std::string &old, int *start, int *end, int h, int m, int s, int ms);
 
@@ -13,4 +13,4 @@ bool canEdit(int *timestamps, int *start, int *end);
 
 // void tests();
 
-#endif  /*  SRT_EDITOR_SRC_OFFSETTER_H  */
+#endif  /*  _SRT_EDITOR_H_  */

@@ -6,7 +6,11 @@
 
 void printUsage();
 
-int parseCommand(int argc, char *argv[], int *offsets, int *startInt, int *endInt, std::string *fileName);
+unsigned int cli();
+
+void printMenu();
+
+int getOffsets(int *start, int *end, int *offsets);
 
 bool isNewLine(std::string compare);
 

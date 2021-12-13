@@ -5,25 +5,36 @@
 #include <sstream>
 #include <vector>
 
-#include "offsetter.h"
+#include "srt-editor.h"
 #include "utils.h"
-// ./srt-editor + hh:mm:ss:msc file
-// ./srt-editor + hh:mm:ss:msc hh:mm:ss:msc hh:mm:ss:msc file
+
 int main(int argc, char *argv[]){
-    if(argc != 4 && argc != 6){   //eventually I'll allow editing multiple files
+    if(argc != 2){   //eventually I'll allow editing multiple files
         printUsage();
         return 1;
     }
 
-    int offsets[4];
-    int start[4];
-    int end[4];
     std::string fileName = "";
     
-    if(parseCommand(argc, argv, offsets, start, end, &fileName) != 0) return 1;
+    //TODO catch error returnal
+    fileName.append(argv[1]);
 
-    addOffset(fileName, start, end, offsets[0], offsets[1], offsets[2], offsets[3]);
-
+    bool loop = true;
+    while(loop){
+        unsigned int option = cli();
+        switch(option){
+            case 0:
+                loop = false;
+                break;
+            case 1:
+                addOffset(fileName);
+                break;
+            case 2:
+                checkIDs(fileName);
+                break;
+        }
+    }
+    
     return 0;
 }
 
@@ -75,7 +86,8 @@ void checkIDs(std::string subFile){
     oldFile.close();
 }
 
-void addOffset(std::string subFile, int *start, int *end, int h, int m, int s, int ms){
+void addOffset(std::string subFile){
+
     //TODO(if I decide to not be lazy): instead of creating a new file, backup the and edit the old one
     std::string newName = subFile;
     newName.insert(newName.size()-4, "-edited");
@@ -83,6 +95,13 @@ void addOffset(std::string subFile, int *start, int *end, int h, int m, int s, i
     //open file from reading and new file for writing to
     std::ifstream oldFile(subFile);
     std::ofstream newFile(newName);
+
+    int offsets[4];
+    int start[4];
+    int end[4];
+    while(true){
+        if(getOffsets(offsets, start, end) == 0) break;
+    }
 
     std::string line;
     while(std::getline(oldFile, line)){
@@ -95,7 +114,7 @@ void addOffset(std::string subFile, int *start, int *end, int h, int m, int s, i
             newFile << line;
             //treat timestamp line
             std::getline(oldFile, line);
-            editTimestamp(line, start, end, h, m, s, ms);
+            editTimestamp(line, start, end, offsets[0], offsets[1], offsets[2], offsets[3]);
             newFile << line;
 
             //treat text
