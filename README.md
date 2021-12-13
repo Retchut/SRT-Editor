@@ -34,10 +34,14 @@ After running the program on one file, an edited file, aptly named "'original-fi
 Line endings will be preserved, save for the line with the timestamps. The line ending in each timestamp will follow the conventions for the OS this program is run in.
 Eventually, I'll take the time to fix this, but it shouldn't cause any issues whatsoever.
 
-##TODO
+## TODO
 
 ---> Clean up "modular arithmetic-like" code up (I was sleep deprived while writing it, don't judge)
+
 ---> Change all files in directory if the path provided was a directory;
+
 ---> Maybe maybe maybe add an option to overwrite the old file;
+
 ---> Add utility to create an empty subtitle at any timestamp (taken up by another sub or not);
+
 ---> Simple cli to allow selecting the utility to be used;
