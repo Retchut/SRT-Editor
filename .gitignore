@@ -2,4 +2,4 @@
 src/*.o
 src/srt-editor
 src/srt-editor.exe
-srt-files/*.srt
+*.srt
