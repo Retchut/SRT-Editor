@@ -3,7 +3,9 @@
 
 #include <string>
 
-void addOffset(std::string filename, int *start, int *end, int h, int m, int s, int ms);
+void checkIDs(std::string subFile);
+
+void addOffset(std::string subFile, int *start, int *end, int h, int m, int s, int ms);
 
 void editTimestamp(std::string &old, int *start, int *end, int h, int m, int s, int ms);
 
