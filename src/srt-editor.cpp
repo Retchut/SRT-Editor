@@ -1,11 +1,21 @@
 #include <stdio.h>
 #include <fstream>
 #include <sstream>
+#include <iostream>
+#include <string>
 
 #include "srt-editor.h"
 #include "utils.h"
 #include "offsetter.h"
 #include "check-id.h"
+#include "save-changes.h"
+
+const std::vector<std::string> menuOptions = {
+    "1 - Add Offset\n",
+    "2 - Check sub IDs\n",
+    "3 - Save Changes\n",
+    "0 - Quit the application\n"
+};
 
 int main(int argc, char *argv[]){
     if(argc != 2){   //eventually I'll allow editing multiple files
@@ -31,10 +41,44 @@ int main(int argc, char *argv[]){
             case 2:
                 checkIDs(fileName);
                 break;
+            case 3:
+                saveChanges(fileName);
+                break;
         }
     }
     
     return 0;
+}
+
+unsigned int cli(){
+    printMenu();
+
+    unsigned int option = 255;
+
+    while(true){
+        std::cout << "\nPlease input your desired option: ";
+        std::string input = "";
+        std::getline(std::cin, input);
+
+        try{
+            option = std::stoi(input);
+        } catch (std::invalid_argument const&) {
+            std::cout << "Please input an integer.\n";
+            continue;
+        }
+        if(!(option < menuOptions.size())){
+            std::cout << "That is not a valid option.\n";
+        }
+        else break;
+    }
+    return option;
+}
+
+void printMenu(){
+    std::cout << std::endl;
+    for(auto &option : menuOptions){
+        std::cout << option;
+    }
 }
 
 // void tests(){

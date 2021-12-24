@@ -2,13 +2,8 @@
 #define SRT_EDITOR_SRC_UTILS_H
 
 #include <vector>
-#include <string>
 
 void printUsage();
-
-unsigned int cli();
-
-void printMenu();
 
 bool isNewLine(std::string compare);
 
