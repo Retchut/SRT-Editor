@@ -37,7 +37,7 @@ void checkIDs(std::string subFile){
 
             //treat timestamp line
             std::getline(oldFile, line);
-            newFile << line;
+            newFile << line << "\n";
 
             //treat text
             while(!(isNewLine(line))){
