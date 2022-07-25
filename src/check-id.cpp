@@ -10,7 +10,7 @@ void checkIDs(std::string subFile){
     std::string newName = subFile;
     newName.insert(newName.size()-4, "-edited");
 
-    //open file from reading and new file for writing to
+    //open file for reading and new file for writing to
     std::ifstream oldFile(subFile);
     std::ofstream newFile(newName);
 

@@ -9,11 +9,13 @@
 #include "offsetter.h"
 #include "check-id.h"
 #include "save-changes.h"
+#include "timestamp-diff.h"
 
 const std::vector<std::string> menuOptions = {
     "1 - Add Offset\n",
     "2 - Check sub IDs\n",
     "3 - Save Changes\n",
+    "4 - Find timestamp differences\n",
     "0 - Quit the application\n"
 };
 
@@ -43,6 +45,9 @@ int main(int argc, char *argv[]){
                 break;
             case 3:
                 saveChanges(fileName);
+                break;
+            case 4:
+                findDiff(fileName);
                 break;
         }
     }
