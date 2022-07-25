@@ -23,12 +23,6 @@ void findDiff(std::string fileName){
     std::vector<int> timestampDiffs;
 
     while(std::getline(original, lineOriginal)){
-        if(toCompare.eof()){
-            std::cout << "\nThe comparison file is shorter. Please make sure both files have the same number of subtitles before running this tool.";
-            original.close();
-            toCompare.close();
-            return;
-        }
         std::getline(toCompare, lineCompare);
         
         // if we read a new line on both files
@@ -41,8 +35,15 @@ void findDiff(std::string fileName){
             ssOriginal >> subIDOriginal;
             ssCompare >> subIDCompare;
 
+            if(subIDCompare == 0){
+                std::cout << "\nThe comparison file is shorter. Please make sure both files have the same number of subtitles before running this tool.\n";
+                original.close();
+                toCompare.close();
+                return;
+            }
+
             if(subIDOriginal != subIDCompare){
-                std::cout << "\nThe files' subtitle IDs are not the same. Please make sure they are before running this tool.";
+                std::cout << "\nThe files' subtitle IDs are not the same (" << subIDOriginal << "/" << subIDCompare << ", original/comparison). Please make sure they are before running this tool.\n";
                 original.close();
                 toCompare.close();
                 return;
@@ -79,7 +80,7 @@ void findDiff(std::string fileName){
     // read remaining line on the comparison file
     std::getline(toCompare, lineCompare);
     if(!toCompare.eof()){
-        std::cout << "\nThe original file is shorter. Please make sure both files have the same number of subtitles before running this tool.";
+        std::cout << "\nThe original file is shorter. Please make sure both files have the same number of subtitles before running this tool.\n";
         return;
     }
 
