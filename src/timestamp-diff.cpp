@@ -9,7 +9,7 @@
 
 void findDiff(std::string fileName){
     std::string compare = getOtherFile();
-    std::ifstream toCompare;
+    std::ifstream toCompare(compare);
     if(toCompare.fail()){
         std::cout << "\nThat file does not exist.\n";
         return;
@@ -23,8 +23,8 @@ void findDiff(std::string fileName){
     std::vector<int> timestampDiffs;
 
     while(std::getline(original, lineOriginal)){
-        if(!toCompare.good()){
-            std::cout << "\nThe files are not the same length.";
+        if(toCompare.eof()){
+            std::cout << "\nThe comparison file is shorter. Please make sure both files have the same number of subtitles before running this tool.";
             original.close();
             toCompare.close();
             return;
@@ -65,26 +65,42 @@ void findDiff(std::string fileName){
             while(!(isNewLine(lineOriginal))){
                 if(!std::getline(original, lineOriginal))
                     break;
+                lineOriginal.append("\n");  //getline ignores \n
             }
             //skip text on the comparison file
-            while(!(isNewLine(lineOriginal))){
-                if(!std::getline(original, lineOriginal))
+            while(!(isNewLine(lineCompare))){
+                if(!std::getline(toCompare, lineCompare))
                     break;
+                lineCompare.append("\n");  //getline ignores \n
             }
         }
+    }
+
+    // read remaining line on the comparison file
+    std::getline(toCompare, lineCompare);
+    if(!toCompare.eof()){
+        std::cout << "\nThe original file is shorter. Please make sure both files have the same number of subtitles before running this tool.";
+        return;
     }
 
     toCompare.close();
     original.close();
 
-    std::cout << "\nThe following subtitles have different timestamps: ";
-    for(unsigned int i = 0; i < timestampDiffs.size(); i++){
-        std::cout << timestampDiffs[i];
+    if(timestampDiffs.size() > 0){
+        std::cout << "\nThe following subtitles have different timestamps: ";
+        for(unsigned int i = 0; i < timestampDiffs.size(); i++){
+            std::cout << timestampDiffs[i];
+        }
+    }
+    else{
+        std::cout << "\nThe files have the same timestamps.";
     }
 
     if(incorrectIDS){
         std::cout << "\n\nAdditionally, the ids on both subtitle files are not in order. It is a good idea to fix that.\n";
     }
+
+    std::cout << std::endl;
 }
 
 std::string getOtherFile(){
