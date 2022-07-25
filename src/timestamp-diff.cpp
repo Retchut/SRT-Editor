@@ -90,8 +90,9 @@ void findDiff(std::string fileName){
     if(timestampDiffs.size() > 0){
         std::cout << "\nThe following subtitles have different timestamps: ";
         for(unsigned int i = 0; i < timestampDiffs.size(); i++){
-            std::cout << timestampDiffs[i];
+            std::cout << timestampDiffs[i] << " ";
         }
+        std::cout << std::endl;
     }
     else{
         std::cout << "\nThe files have the same timestamps.";
