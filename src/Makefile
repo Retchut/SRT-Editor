@@ -9,8 +9,8 @@ else
 	DELETE=rm -f
 endif
 
-all: srt-editor.o utils.o offsetter.o check-id.o save-changes.o timestamp-diff.o
-	$(CC) srt-editor.o utils.o offsetter.o check-id.o save-changes.o timestamp-diff.o -o $(EXECUTABLE)
+all: srt-editor.o utils.o offsetter.o check-id.o save-changes.o timestamp-diff.o timestamp-copy.o
+	$(CC) srt-editor.o utils.o offsetter.o check-id.o save-changes.o timestamp-diff.o timestamp-copy.o -o $(EXECUTABLE)
 
 srt-editor.o: srt-editor.cpp utils.cpp
 	$(CC) $(CFLAGS) srt-editor.cpp utils.cpp
@@ -26,6 +26,9 @@ save-changes.o: save-changes.cpp
 
 timestamp-diff.o: timestamp-diff.cpp
 	$(CC) $(CFLAGS) timestamp-diff.cpp
+
+timestamp-copy.o: timestamp-copy.cpp
+	$(CC) $(CFLAGS) timestamp-copy.cpp
 
 clean:
 	-$(DELETE) *.o srt-editor srt-editor.exe

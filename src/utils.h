@@ -9,4 +9,6 @@ bool isNewLine(std::string compare);
 
 std::vector<std::string> splitString(std::string toSplit, std::string delimiters);
 
+std::string getOtherFile();
+
 #endif  /*  SRT_EDITOR_SRC_UTILS_H  */

@@ -34,3 +34,10 @@ std::vector<std::string> splitString(std::string toSplit, std::string delimiters
 
     return words;
 }
+
+std::string getOtherFile(){
+    std::string input;
+    std::cout << "\nPlease input the name of the file you want to compare to: ";
+    std::getline(std::cin, input);
+    return input;
+}
