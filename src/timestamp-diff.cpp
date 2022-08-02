@@ -58,6 +58,8 @@ void findDiff(std::string fileName){
             //timestamp line
             std::getline(original, lineOriginal);
             std::getline(toCompare, lineCompare);
+            removeLineEndings(lineOriginal);
+            removeLineEndings(lineCompare);
             if(lineOriginal != lineCompare){
                 timestampDiffs.push_back(subIDOriginal);
             }

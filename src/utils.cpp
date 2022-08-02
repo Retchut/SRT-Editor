@@ -1,6 +1,8 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
 
 #include "utils.h"
 
@@ -40,4 +42,9 @@ std::string getOtherFile(){
     std::cout << "\nPlease input the name of the file you want to compare to: ";
     std::getline(std::cin, input);
     return input;
+}
+
+void removeLineEndings(std::string &toEdit){
+    toEdit.erase(std::remove(toEdit.begin(), toEdit.end(), '\n'), toEdit.end());
+    toEdit.erase(std::remove(toEdit.begin(), toEdit.end(), '\r'), toEdit.end());
 }
