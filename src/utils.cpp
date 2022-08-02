@@ -1,6 +1,8 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
 
 #include "utils.h"
 
@@ -33,4 +35,19 @@ std::vector<std::string> splitString(std::string toSplit, std::string delimiters
     }
 
     return words;
+<<<<<<< Updated upstream
+=======
+}
+
+std::string getOtherFile(){
+    std::string input;
+    std::cout << "\nPlease input the name of the file you want to compare to: ";
+    std::getline(std::cin, input);
+    return input;
+}
+
+void removeLineEndings(std::string &toEdit){
+    toEdit.erase(std::remove(toEdit.begin(), toEdit.end(), '\n'), toEdit.end());
+    toEdit.erase(std::remove(toEdit.begin(), toEdit.end(), '\r'), toEdit.end());
+>>>>>>> Stashed changes
 }
