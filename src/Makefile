@@ -9,6 +9,7 @@ else
 	DELETE=rm -f
 endif
 
+.PHONY: all clean
 all: srt-editor.o utils.o offsetter.o check-id.o save-changes.o timestamp-diff.o timestamp-copy.o
 	$(CC) srt-editor.o utils.o offsetter.o check-id.o save-changes.o timestamp-diff.o timestamp-copy.o -o $(EXECUTABLE)
 
